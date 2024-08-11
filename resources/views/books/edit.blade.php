@@ -1,59 +1,48 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Edit Book</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title', 'Edit Book')
 
-<body>
-    <div class="container">
-        <h1>Edit Book</h1>
-        <form action="{{ route('books.update', $book->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" name="title" class="form-control" value="{{ $book->title }}" required
-                    value="{{ old('title') }}">
-                @error('title')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" name="author" class="form-control" value="{{ $book->author }}" required>
-                @error('author')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="published_date">Published Date</label>
-                <input type="date" name="published_date" class="form-control" value="{{ $book->published_date }}"
-                    required>
-            </div>
-            <div class="form-group">
-                <label for="isbn">ISBN</label>
-                <input type="text" name="isbn" class="form-control" value="{{ $book->isbn }}" required>
-                @error('isbn')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="category_id">Category</label>
-                <select name="category_id" class="form-control" required>
-                    @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $book->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}</option>
-                    @endforeach
-                    @error('category_id')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
-    </div>
-</body>
+@section('header', 'Edit Book')
 
-</html>
+@section('content')
+<div class="container">
+    <h1>Edit Book</h1>
+    <form action="{{ route('books.update', $book->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
+                value="{{ old('title', $book->title) }}" required>
+            @error('title')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" name="author" class="form-control @error('author') is-invalid @enderror"
+                value="{{ old('author', $book->author) }}" required>
+            @error('author')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="published_date">Published Date</label>
+            <input type="date" name="published_date" class="form-control @error('published_date') is-invalid @enderror"
+                value="{{ old('published_date', $book->published_date) }}" required>
+            @error('published_date')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input type="text" name="isbn" class="form-control @error('isbn') is-invalid @enderror"
+                value="{{ old('isbn', $book->isbn) }}" required>
+            @error('isbn')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <button type="submit" class="btn btn-primary">Update Book</button>
+    </form>
+</div>
+@endsection
