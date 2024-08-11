@@ -46,17 +46,18 @@
                     <td>
                         <a href="{{ route('books.show', $book->id) }}" class="btn btn-info">View</a>
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('books.uploadForm', $book->id) }}" class="btn btn-info">Upload Files</a>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        <!-- logout temp button -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
     </div>
 
-    <!-- logout temp button -->
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
 </body>
 
 </html>
