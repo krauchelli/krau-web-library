@@ -7,6 +7,25 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <form action="{{ route('books.index') }}" method="GET">
+                    <div class="form-group">
+                        <label for="category_id">Filter by Category:</label>
+                        <select name="category_id" id="category_id" class="form-control">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ request()->input('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
+            </div>
+        </div>
         @foreach($books as $book)
         <div class="col-md-4">
             <div class="card mb-4">
@@ -28,6 +47,11 @@
             </div>
         </div>
         @endforeach
+        <div class="row">
+            <div class="col-md-12">
+                {{ $books->appends(['category_id' => request()->input('category_id')])->links() }}
+            </div>
+        </div>
     </div>
 </div>
 @endsection
