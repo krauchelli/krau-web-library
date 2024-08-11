@@ -20,6 +20,14 @@
         <p><strong>Published Date:</strong> {{ $book->published_date }}</p>
         <p><strong>ISBN:</strong> {{ $book->isbn }}</p>
         <p><strong>Category:</strong> {{ $book->category->name }}</p>
+        <p><strong>PDF File:</strong>
+            @if ($book->filename)
+            <a href="{{ asset('storage/' . $book->filename) }}" target="_blank">Download</a>
+            @else
+            No PDF file available.
+            @endif
+        </p>
+        </p>
         <a href="{{ route('books.index') }}" class="btn btn-primary">Back to List</a>
         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit</a>
         <a href="{{ route('books.uploadForm', $book->id) }}" class="btn btn-info">Upload Files</a>
