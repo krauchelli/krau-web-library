@@ -15,11 +15,18 @@
             @csrf
             <div class="form-group">
                 <label for="pdf">Choose PDF File</label>
-                <input type="file" class="form-control" id="pdf" name="pdf" required>
+                <input type="file" class="form-control @error('pdf') is-invalid @enderror" id="pdf" name="pdf" required>
+                @error('pdf')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="cover_image">Choose Cover Image</label>
-                <input type="file" class="form-control" id="cover_image" name="cover_image" required>
+                <input type="file" class="form-control @error('cover-image') is-invalid @enderror" id="cover_image"
+                    name="cover_image" required>
+                @error('cover_image')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <input type="hidden" name="book_id" value="{{ $book->id }}">
             <button type="submit" class="btn btn-primary">Upload</button>
