@@ -3,6 +3,7 @@
 
 <head>
     <title>Books PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,6 +17,7 @@
                 <th>Published Date</th>
                 <th>ISBN</th>
                 <th>Category</th>
+                <th>PDF Link</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,13 @@
                 <td>{{ $book->published_date }}</td>
                 <td>{{ $book->isbn }}</td>
                 <td>{{ $book->category->name }}</td>
+                <td>
+                    @if ($book->filename)
+                    <a href="{{ asset('storage/' . $book->filename) }}" target="_blank">Download</a>
+                    @else
+                    No PDF file available.
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
