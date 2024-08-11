@@ -27,6 +27,7 @@
         <table class="table mt-3">
             <thead>
                 <tr>
+                    <th>Cover</th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Published Date</th>
@@ -38,6 +39,13 @@
             <tbody>
                 @foreach($books as $book)
                 <tr>
+                    <td>
+                        @if ($book->cover_image)
+                        <img src="{{ asset('storage/' . $book->cover_image) }}" alt="{{ $book->title }}" width="50">
+                        @else
+                        <img src="https://picsum.photos/50" alt="default image. Please upload!">
+                        @endif
+                    </td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author }}</td>
                     <td>{{ $book->published_date }}</td>
