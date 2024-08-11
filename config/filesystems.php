@@ -52,6 +52,20 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'pdfs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/pdfs'),
+            'url' => env('APP_URL').'/pdfs',
+            'visibility' => 'public',
+        ],
+
+        'images' => [
+            'driver' => 'local',
+            'root' => storage_path('app/images'),
+            'url' => env('APP_URL').'/images',
+            'visibility' => 'public',
+    ],
+
     ],
 
     /*
