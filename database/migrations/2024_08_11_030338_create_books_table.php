@@ -20,6 +20,7 @@ class CreateBooksTable extends Migration
             $table->date('published_date');
             $table->string('isbn')->unique();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

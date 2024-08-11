@@ -17,11 +17,18 @@ class Book extends Model
         'published_date',
         'isbn',
         'category_id',
+        'user_id',
     ];
 
     // Define the relationship with Category
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    // Define the relationship with User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
