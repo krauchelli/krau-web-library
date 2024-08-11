@@ -101,7 +101,7 @@ class BookController extends Controller
     // method untuk melakukan export
     public function exportPDF()
     {
-        $books = Book::all();
+        $books = $this->getBooks();
         $pdf = PDF::loadView('books.pdf', compact('books'));
 
         return $pdf->download('books.pdf');
@@ -109,7 +109,8 @@ class BookController extends Controller
 
     public function exportExcel()
     {
-        return Excel::download(new BooksExport, 'books.xlsx');
+        $books = $this->getBooks();
+        return Excel::download(new BooksExport($books), 'books.xlsx');
     }
 
     // method untuk menampilkan form upload file
