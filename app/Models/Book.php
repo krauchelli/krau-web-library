@@ -18,6 +18,10 @@ class Book extends Model
         'isbn',
         'category_id',
         'user_id',
+        'description',
+        'amount',
+        'filename',
+        'cover_image',
     ];
 
     // Define the relationship with Category

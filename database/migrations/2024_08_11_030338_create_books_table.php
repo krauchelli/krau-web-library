@@ -21,6 +21,10 @@ class CreateBooksTable extends Migration
             $table->string('isbn')->unique();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text('description')->nullable();
+            $table->integer('amount')->default(5);
+            $table->string('filename')->nullable();
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }
