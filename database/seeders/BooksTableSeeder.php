@@ -24,7 +24,7 @@ class BooksTableSeeder extends Seeder
         // ]);
         $faker = Faker::create();
 
-        foreach (range(1, 10) as $index) {
+        foreach (range(1, 25) as $index) {
             DB::table('books')->insert([
                 'title' => $faker->sentence(3),
                 'author' => $faker->name,
