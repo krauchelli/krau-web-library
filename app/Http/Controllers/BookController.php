@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Exports\BooksExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -110,6 +111,53 @@ class BookController extends Controller
     {
         return Excel::download(new BooksExport, 'books.xlsx');
     }
+
+    // method untuk menampilkan form upload file
+    public function uploadForm($bookId)
+    {
+        $book = $this->getBookById($bookId);
+        return view('books.upload', compact('book'));
+    }
+
+    // method upload file image dan pdf
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'pdf' => 'required|mimes:pdf|max:2048',
+            'cover_image' => 'required|image|max:2048',
+        ]);
+
+        $pdfPath = $request->file('pdf')->store('pdfs');
+        $imagePath = $request->file('cover_image')->store('images');
+
+        // update path file pdf dan image ke database
+        $bookId = $request->input('book_id');
+        $book = $this->getBookById($bookId);
+        $book->update([
+            'filename' => $pdfPath,
+            'cover_image' => $imagePath,
+        ]);
+        $book->save();
+
+        // check return with response
+        return response()->json([
+            $pdfPath, $imagePath
+        ]);
+        // return redirect()->route('books.show', ['id' => $bookId])->with('success', 'File has been uploaded');
+    }
+    
+    // method untuk menampilkan image
+    public function getImage($cover_image)
+    {
+        return response()->file(storage_path('app/images/' . $cover_image));
+    }
+
+    // method untuk menampilkan pdf
+    public function getPdf($filename)
+    {
+        return response()->file(storage_path('app/pdfs/' . $filename));
+    }
+
 
     // private method untuk menampilkan buku berdasarkan user
     private function getBooks() 

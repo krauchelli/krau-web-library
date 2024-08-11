@@ -45,8 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('books.edit');
     Route::get('/books/export/excel', [BookController::class, 'exportExcel'])->name('books.export.excel');
     Route::get('/books/export/pdf', [BookController::class, 'exportPDF'])->name('books.export.pdf');
+    Route::get('/img/{filename}', [BookController::class, 'getImage'])->name('books.image');
+    Route::get('/pdf/{filename}', [BookController::class, 'getPdf'])->name('books.pdf');
+    Route::get('/books/{id}/upload', [BookController::class, 'uploadForm'])->name('books.uploadForm');
 
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
+    Route::post('/books/upload', [BookController::class, 'upload'])->name('books.upload');
     
     Route::put('/books/{id}', [BookController::class, 'update'])->name('books.update');
     
