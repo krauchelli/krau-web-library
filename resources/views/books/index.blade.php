@@ -9,6 +9,8 @@
     <div class="container">
         <h1>Books List</h1>
         <a href="{{ route('books.create') }}" class="btn btn-primary">Add New Book</a>
+        <a href="{{ route('books.export.pdf') }}" class="btn btn-primary">Export to PDF</a>
+        <a href="{{ route('books.export.excel') }}" class="btn btn-primary">Export to Excel</a>
         <form action="{{ route('books.index') }}" method="GET" class="mt-3">
             <div class="form-group">
                 <label for="category_id">Filter by Category</label>
