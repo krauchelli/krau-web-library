@@ -22,12 +22,12 @@ class BookController extends Controller
     // method untuk menampilkan halaman daftar buku
     public function index(Request $request)
     {
-        $books = $this->getBooks();
+        $books = $this->getPaginatedBooks();
         $categories = Category::all();
         $category_id = $request->input('category_id');
 
         if ($category_id) {
-            $books = Book::where('category_id', $category_id)->get();
+            $books = Book::where('category_id', $category_id)->paginate(10);
         }
         return view('books.index', compact('books', 'categories', 'category_id'));
     }
@@ -155,6 +155,16 @@ class BookController extends Controller
         return response()->file(storage_path('app/pdfs/' . $filename));
     }
 
+
+    // method untuk mendapatkan buku dengan pagination
+    private function getPaginatedBooks()
+    {
+        if (Auth::user()->is_admin) {
+            return Book::paginate(10);
+        } else {
+            return Book::where('user_id', Auth::id())->paginate(10);
+        }
+    }
 
     // private method untuk menampilkan buku berdasarkan user
     private function getBooks() 
