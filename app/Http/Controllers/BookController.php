@@ -139,11 +139,7 @@ class BookController extends Controller
         ]);
         $book->save();
 
-        // check return with response
-        return response()->json([
-            $pdfPath, $imagePath
-        ]);
-        // return redirect()->route('books.show', ['id' => $bookId])->with('success', 'File has been uploaded');
+        return redirect()->route('books.show', ['id' => $bookId])->with('success', 'File has been uploaded');
     }
     
     // method untuk menampilkan image
