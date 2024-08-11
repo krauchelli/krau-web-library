@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title', 'Register')
+
+@section('content')
 
 <body>
     <div class="container">
@@ -44,7 +42,4 @@
             </div>
         </form>
     </div>
-
-</body>
-
-</html>
+    @endsection
