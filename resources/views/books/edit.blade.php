@@ -3,6 +3,7 @@
 
 <head>
     <title>Edit Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -15,10 +16,16 @@
                 <label for="title">Title</label>
                 <input type="text" name="title" class="form-control" value="{{ $book->title }}" required
                     value="{{ old('title') }}">
+                @error('title')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="author">Author</label>
                 <input type="text" name="author" class="form-control" value="{{ $book->author }}" required>
+                @error('author')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="published_date">Published Date</label>
@@ -28,6 +35,9 @@
             <div class="form-group">
                 <label for="isbn">ISBN</label>
                 <input type="text" name="isbn" class="form-control" value="{{ $book->isbn }}" required>
+                @error('isbn')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="category_id">Category</label>
@@ -36,6 +46,9 @@
                     <option value="{{ $category->id }}" {{ $book->category_id == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}</option>
                     @endforeach
+                    @error('category_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
